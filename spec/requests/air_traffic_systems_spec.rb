@@ -1,5 +1,6 @@
 require 'rspec'
 require_relative '../../app/models/aircraft'
+require_relative '../../app/models/aircraft_prioritizer'
 require_relative '../../app/models/air_traffic_control'
 
 
@@ -8,7 +9,7 @@ describe 'air traffic control system' do
   
   context '#system_boot' do
     it 'creates an empty que' do
-      expect(atc.current_queue).to eq([])
+      expect(atc.queue).to eq([])
     end
   end
 
@@ -16,7 +17,7 @@ describe 'air traffic control system' do
     it 'should add an aircraft to the que' do
       expect do
         atc.enqeue_aircraft(Aircraft.large_passenger)
-      end.to change(atc.current_queue, :count).by(1)
+      end.to change(atc.queue, :count).by(1)
     end
   end  
 
